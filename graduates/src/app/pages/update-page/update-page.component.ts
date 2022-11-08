@@ -1,4 +1,5 @@
-import { ConfirmDeleteComponent } from './../../components/confirm-delete/confirm-delete.component';
+import { ConfirmMessageComponent } from './../../components/confirm-message/confirm-message.component';
+
 import { Graduate } from './../../models/Graduate';
 import { GraduateService } from './../../services/graduate.service';
 import { Component, OnInit } from '@angular/core';
@@ -6,7 +7,7 @@ import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmUpdateComponent } from 'src/app/components/confirm-update/confirm-update.component';
+
 @Component({
   selector: 'app-update-page',
   templateUrl: './update-page.component.html',
@@ -146,13 +147,13 @@ export class UpdatePageComponent implements OnInit {
   }
   update(){
         
-         const dialogRef = this.dialog.open(ConfirmUpdateComponent, {
+         const dialogRef = this.dialog.open(ConfirmMessageComponent, {
           width: '500px',
-          data: {graduate: this.Graduate},
+          data: {message: "¿ Esta seguro de actualizar ?",state:true},
         });
         dialogRef.afterClosed().subscribe(result => {
   
-          if(result==true){
+          if(result.state==true){
             console.log('The dialog was closed');
             if(this.validyear==false){
                   this.GraduateUpdate.year=this.Graduate.year
@@ -172,12 +173,12 @@ export class UpdatePageComponent implements OnInit {
   }
   delete(){
     
-    const dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+    const dialogRef = this.dialog.open(ConfirmMessageComponent, {
       width: '500px',
-      data: {graduate: this.Graduate},
+      data: {message: "¿ Esta seguro de eliminar ?",state:true},
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result==true){
+      if(result.state==true){
         console.log('The dialog was closed');
       }
 

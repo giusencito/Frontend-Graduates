@@ -1,11 +1,11 @@
 <div mat-dialog-content>
 
-  <h1>¿ Esta seguro de actualizar ?</h1>
+  <h1>{{data.message}}</h1>
 
 
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="accept()">Denegar</button>
+  <button mat-button (click)="denegate()">Denegar</button>
   <button mat-button [mat-dialog-close]="data">Aceptar</button>
 </div>

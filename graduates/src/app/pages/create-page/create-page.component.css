@@ -1,0 +1,11 @@
+.formv{
+width: 100%;
+}
+.elements{
+  justify-content: right;
+}
+.title{
+    text-align: center;
+    font-size: 40px;
+    font-family: 'Times New Roman', Times, serif;
+}

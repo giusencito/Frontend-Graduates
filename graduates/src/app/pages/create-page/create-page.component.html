@@ -1,0 +1,56 @@
+
+<app-navigation></app-navigation>
+
+<mat-card>
+<div class="title">
+<p >Create Graduate</p>
+</div>
+
+<form [formGroup]="createform">
+
+<div>
+  <mat-form-field appearance="fill" class="formv">
+    <mat-label>Enter the Year</mat-label>
+    <mat-select formControlName="year" [(ngModel)]="Graduate.year">
+      <mat-option *ngFor="let year of years" [value]="year">
+           {{year}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="createform.controls['year'].dirty && createform.hasError('required','email')">Es requerido</mat-error>
+  </mat-form-field>
+</div>
+<div>
+  <mat-form-field appearance="fill" class="formv">
+    <mat-label>Enter the Sex</mat-label>
+    <mat-select formControlName="sex"  [(ngModel)]="Graduate.sex">
+      <mat-option value="Males">Males</mat-option>
+      <mat-option value="Females">Females</mat-option>
+    </mat-select>
+    <mat-error *ngIf="createform.controls['sex'].dirty && createform.hasError('required','sex')">Es requerido</mat-error>
+  </mat-form-field>
+</div>
+<div>
+  <mat-form-field appearance="fill" class="formv">
+    <mat-label>Type of Course</mat-label>
+    <input matInput placeholder="Doctor"  required formControlName="course"  [(ngModel)]="Graduate.type_of_course">
+    <mat-error *ngIf="createform.controls['course'].dirty && createform.hasError('required','course')">Es requerido</mat-error>
+
+  </mat-form-field>
+</div>
+<div>
+  <mat-form-field appearance="fill" class="formv">
+    <mat-label>No. Of Graduates</mat-label>
+    <input matInput type="number" placeholder="Ex. 12" min="0" formControlName="no_graduates" [(ngModel)]="Graduate.no_of_graduates">
+    <mat-error *ngIf="createform.controls['no_graduates'].dirty && createform.hasError('required','no_graduates')">Es requerido</mat-error>
+
+  </mat-form-field>
+</div>
+
+  
+
+  <button mat-raised-button color="warn" class="formv" (click)="clean()">Clean</button>
+ 
+  <button mat-raised-button color="primary" class="formv" (click)="create()" [disabled]="!createform.valid">Create</button>
+ 
+</form>
+</mat-card>
