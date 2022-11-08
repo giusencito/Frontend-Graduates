@@ -1,0 +1,30 @@
+.logo{
+
+    width: 15%;
+    height: 90%;
+    border-radius: 50%;
+    
+}
+.options a{
+  
+    font-family:'Times New Roman', Times, serif;
+    color:whitesmoke;
+    font-size: 30px;
+  
+  
+}
+
+.options a:hover{
+    color: blue;
+}
+
+.homebar{
+    background-color: black;
+}
+.spacer {
+    flex: 1 1 auto;
+  }
+  .title{
+       color: white;
+       font-size: 40px;
+  }

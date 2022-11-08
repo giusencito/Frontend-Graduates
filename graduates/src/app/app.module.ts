@@ -1,3 +1,4 @@
+import { NavigationComponent } from './components/navigation/navigation.component';
 import { MaterialModule } from './material/material.module';
 
 import { NgModule } from '@angular/core';
@@ -11,7 +12,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
-    MainPageComponent
+    MainPageComponent,
+    NavigationComponent
   
   ],
   imports: [
