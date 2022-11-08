@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
   }
-
+  goHome(){
+    this.router.navigate(['/home'])
+  }
+  goFilter(){
+    this.router.navigate(['/filter'])
+  }
+  goCreate(){
+    this.router.navigate(['/create'])
+  }
 }
