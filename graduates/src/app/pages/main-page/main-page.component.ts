@@ -4,6 +4,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { Graduate } from 'src/app/models/Graduate';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
@@ -14,7 +15,7 @@ export class MainPageComponent implements OnInit  {
   dataSource!:MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
  
-  constructor(private GraduateService:GraduateService ) { 
+  constructor(private GraduateService:GraduateService,private router:Router ) { 
     
   }
 
@@ -30,6 +31,10 @@ export class MainPageComponent implements OnInit  {
        this.dataSource.paginator = this.paginator;
       
     })
+  }
+  update(id:any){
+    this.router.navigate(['/update',id])
+
   }
 
 }

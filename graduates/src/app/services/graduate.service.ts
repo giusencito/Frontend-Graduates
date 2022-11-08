@@ -33,12 +33,16 @@ getall(){
   .pipe(
     retry(2),
     catchError(this.handleError));
-
-
-
 }
 
+getByID(id:number){
 
+  return this.http.get<Graduate>( `${this.basePath}/${id}`, this.httpOptions)
+  .pipe(
+    retry(2),
+    catchError(this.handleError));
+
+}
 
 
 
