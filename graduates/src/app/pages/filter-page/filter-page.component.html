@@ -1,7 +1,237 @@
 <app-navigation></app-navigation>
-<mat-tab-group mat-align-tabs="start">
-  <mat-tab label="Year">Content 1</mat-tab>
-  <mat-tab label="Sex">Content 2</mat-tab>
-  <mat-tab label="Type Of Course">Content 3</mat-tab>
-  <mat-tab label="No. Of Graduates">Content 3</mat-tab>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Year">
+
+
+    <table class="tab">
+      <tr>
+        <th>  <button mat-raised-button (click)="changefindyear()">Find Year</button></th>
+        <th>
+         <button mat-raised-button (click)="changebetweenyear()"> Between Years</button>
+        </th>
+        <th>
+          <button mat-raised-button (click)="changebeforeyear()"> Before Year</button>
+        </th>
+        <th>
+          <button mat-raised-button (click)="changeafteryear()"> After Year</button>
+        </th>
+      </tr>
+    </table>
+
+    <div *ngIf="findyear">
+    <form [formGroup]="getyearform">
+  <mat-card>
+    <div class="title">
+      <p >Find Year</p>
+      </div>
+    <mat-form-field appearance="fill" class="btn-check">  
+      <mat-label>Enter the Year</mat-label>
+      <mat-select formControlName="year" [(ngModel)]="yearby">
+        <mat-option *ngFor="let year of years" [value]="year">
+             {{year}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button class="btn-check" (click)="GetByYear(yearby)" [disabled]="!getyearform.valid">Check</button>
+  </mat-card>
+
+   
+    </form>
+    </div>
+
+  <div *ngIf="betweenyear">
+    <form [formGroup]="getyearbetform">
+      <mat-card>
+        <div class="title">
+          <p >Between Years</p>
+          </div>
+        <mat-form-field appearance="fill" class="btn-check">  
+          <mat-label>Enter the Year</mat-label>
+          <mat-select formControlName="yearbet1" [(ngModel)]="yearbet1">
+            <mat-option *ngFor="let year of years" [value]="year">
+                 {{year}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="btn-check">  
+          <mat-label>Enter the Year</mat-label>
+          <mat-select formControlName="yearbet2" [(ngModel)]="yearbet2">
+            <mat-option *ngFor="let year of years" [value]="year">
+                 {{year}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button class="btn-check" [disabled]="!getyearbetform.valid" (click)="GetBetweenYear(yearbet1,yearbet2)">Check</button>
+      </mat-card>
+        </form>
+      </div>
+
+  <div *ngIf="beforeyear">
+        <form [formGroup]="getyearform">
+          <mat-card>
+            <div class="title">
+              <p >Before Year</p>
+              </div>
+            <mat-form-field appearance="fill" class="btn-check">  
+              <mat-label>Enter the Year</mat-label>
+              <mat-select formControlName="year" [(ngModel)]="yearby">
+                <mat-option *ngFor="let year of years" [value]="year">
+                     {{year}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button mat-raised-button class="btn-check" (click)="GetByBeforeYear(yearby)" [disabled]="!getyearform.valid">Check</button>
+          </mat-card>
+           </form>
+          </div>
+
+  <div *ngIf="afteryear">
+         <form [formGroup]="getyearform">
+              <mat-card>
+                <div class="title">
+                  <p >After Year</p>
+                  </div>
+                <mat-form-field appearance="fill" class="btn-check">  
+                  <mat-label>Enter the Year</mat-label>
+                  <mat-select formControlName="year" [(ngModel)]="yearby">
+                    <mat-option *ngFor="let year of years" [value]="year">
+                         {{year}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <button mat-raised-button class="btn-check" (click)="GetByAfterYear(yearby)" [disabled]="!getyearform.valid">Check</button>
+              </mat-card>
+           </form>
+          </div>
+  </mat-tab>
+  <mat-tab label="Sex">
+    <mat-card>
+    <form [formGroup]="getsexform">
+    <mat-form-field appearance="fill"  class="btn-check">
+      <mat-label>Enter the Sex</mat-label>
+      <mat-select formControlName="sex"  [(ngModel)]="sex">
+        <mat-option value="Males">Males</mat-option>
+        <mat-option value="Females">Females</mat-option>
+      </mat-select>
+    </mat-form-field>
+    </form>
+    <button mat-raised-button class="btn-check" (click)="GetBySex(sex)" [disabled]="!getsexform.valid">Check</button>
+</mat-card>
+  </mat-tab>
+  <mat-tab label="Type Of Course">
+    
+    <table class="tab">
+      <tr>
+        <th>  <button mat-raised-button (click)="changestart()">Starting With</button></th>
+        <th>
+         <button mat-raised-button (click)="changesend()"> Ending With</button>
+        </th>
+        <th>
+          <button mat-raised-button (click)="changescontain()"> Containing</button>
+        </th>
+        <th>
+          <button mat-raised-button (click)="changesnotcontain()"> Not Containing</button>
+        </th>
+      </tr>
+    </table>
+
+    <div *ngIf="startwith">
+     <form [formGroup]="getcourseform">
+      <mat-card>
+
+        <mat-form-field appearance="fill" >
+          <mat-label>Starts with</mat-label>
+          <input matInput placeholder="D"  required formControlName="course"  [(ngModel)]="course">
+        </mat-form-field>
+        <button mat-raised-button class="btn-check" (click)="GetStart(course)" [disabled]="!getcourseform.valid">Check</button>
+
+      </mat-card>
+     </form>
+    </div>
+    <div *ngIf="endwith">
+      <form [formGroup]="getcourseform"> <mat-card>
+        <mat-form-field appearance="fill" >
+          <mat-label>Ending With</mat-label>
+          <input matInput placeholder="r"  required formControlName="course"  [(ngModel)]="course">
+        </mat-form-field>
+        <button mat-raised-button class="btn-check" (click)="GetEnd(course)" [disabled]="!getcourseform.valid">Check</button>
+      </mat-card></form>
+    </div>
+    <div *ngIf="containg">
+      <form [formGroup]="getcourseform"> <mat-card>
+        <mat-form-field appearance="fill" >
+          <mat-label>Containing</mat-label>
+          <input matInput placeholder="D"  required formControlName="course"  [(ngModel)]="course">
+        </mat-form-field>
+        <button mat-raised-button class="btn-check" (click)="GetContaining(course)" [disabled]="!getcourseform.valid">Check</button>
+      </mat-card></form>
+    </div>
+    <div *ngIf="notcontaining">
+      <form [formGroup]="getcourseform"> <mat-card>
+        <mat-form-field appearance="fill" >
+          <mat-label>Not Containing</mat-label>
+          <input matInput placeholder="D"  required formControlName="course"  [(ngModel)]="course">
+        </mat-form-field>
+        <button mat-raised-button class="btn-check" (click)="GetNotContaining(course)" [disabled]="!getcourseform.valid">Check</button>
+      </mat-card>
+    </form>
+    </div>
+
+
+  </mat-tab>
+  <mat-tab label="No. Of Graduates">
+
+    <table class="tab">
+      <tr>
+        <th>  <button mat-raised-button (click)="changestart()">Equals</button></th>
+        <th>
+         <button mat-raised-button (click)="changesend()"> Less Than</button>
+        </th>
+        <th>
+          <button mat-raised-button (click)="changescontain()"> Greather than</button>
+        </th>
+       
+      </tr>
+    </table>
+
+
+
+
+  </mat-tab>
 </mat-tab-group>
+<div class="mat-elevation-z8" *ngIf="changesize">
+  <table mat-table [dataSource]="dataSource" >
+   
+    
+    <ng-container matColumnDef="year" >
+      <th mat-header-cell *matHeaderCellDef > Year</th>
+      <td mat-cell *matCellDef="let element"> {{element.year}} </td>
+    </ng-container>
+    <ng-container matColumnDef="sex">
+      <th mat-header-cell *matHeaderCellDef > Sex </th>
+      <td mat-cell *matCellDef="let element"> {{element.sex}} </td>
+    </ng-container>
+    <ng-container matColumnDef="type_course">
+      <th mat-header-cell *matHeaderCellDef > Type Of Course </th>
+      <td mat-cell *matCellDef="let element"> {{element.typeOfCourse}} </td>
+    </ng-container>
+    <ng-container matColumnDef="no_graduates">
+      <th mat-header-cell *matHeaderCellDef > No. Of Graduates </th>
+      <td mat-cell *matCellDef="let element"> {{element.noOfGraduates}} </td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row 
+    (click)="update(row.id)"
+    *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator   [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons 
+                   aria-label="Select page of periodic elements" >
+    </mat-paginator>
+  </div>
+
+
+

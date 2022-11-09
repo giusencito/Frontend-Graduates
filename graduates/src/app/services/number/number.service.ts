@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {Observable, throwError} from "rxjs";
-import {catchError, retry} from "rxjs/operators";
-import { Graduate } from '../models/Graduate';
+import {catchError, retry} from "rxjs/operators"
+import { Graduate } from 'src/app/models/Graduate';
 @Injectable({
   providedIn: 'root'
 })
-export class GraduateService {
+export class NumberService {
 
-  basePath="http://localhost:8080/api/v1/graduatesCrud"
+
+  basePath="http://localhost:8080/api/v1/graduates/numbers"
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -28,34 +29,25 @@ handleError(error: HttpErrorResponse) {
   return throwError('Something happened with request, please try again later');
 }
 
-getall(){
-  return this.http.get<Graduate>(this.basePath, this.httpOptions)
+
+getNumber(number:string){
+  return this.http.get<Graduate>( `${this.basePath}/${number}`, this.httpOptions)
   .pipe(
     retry(2),
     catchError(this.handleError));
 }
-
-getByID(id:number){
-
-  return this.http.get<Graduate>( `${this.basePath}/${id}`, this.httpOptions)
-  .pipe(
-    retry(2),
-    catchError(this.handleError));
-
-}
-getBySex(name:string){
-
-  return this.http.get<Graduate>( `${this.basePath}/sex/${name}`, this.httpOptions)
+getLess(number:string){
+  return this.http.get<Graduate>( `${this.basePath}/noGraduatesLess/${number}`, this.httpOptions)
   .pipe(
     retry(2),
     catchError(this.handleError));
 
 }
-
-
-
-
-
-
+getGreather(number:string){
+  return this.http.get<Graduate>( `${this.basePath}/noGraduatesGreather/${number}`, this.httpOptions)
+  .pipe(
+    retry(2),
+    catchError(this.handleError));
+}
 
 }

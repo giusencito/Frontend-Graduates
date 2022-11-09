@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {Observable, throwError} from "rxjs";
-import {catchError, retry} from "rxjs/operators";
-import { Graduate } from '../models/Graduate';
+import {catchError, retry} from "rxjs/operators"
+import { Graduate } from 'src/app/models/Graduate';
 @Injectable({
   providedIn: 'root'
 })
-export class GraduateService {
-
-  basePath="http://localhost:8080/api/v1/graduatesCrud"
+export class CourseService {
+  basePath="http://localhost:8080/api/v1/graduates/courses"
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -28,30 +27,36 @@ handleError(error: HttpErrorResponse) {
   return throwError('Something happened with request, please try again later');
 }
 
-getall(){
-  return this.http.get<Graduate>(this.basePath, this.httpOptions)
+
+courseStartWith(course:string)
+{
+  return this.http.get<Graduate>( `${this.basePath}/courseStartWith/${course}`, this.httpOptions)
   .pipe(
     retry(2),
     catchError(this.handleError));
 }
 
-getByID(id:number){
+courseEndsWith(course:string){
+  return this.http.get<Graduate>( `${this.basePath}/courseEndsWith/${course}`, this.httpOptions)
+  .pipe(
+    retry(2),
+    catchError(this.handleError));
+}
 
-  return this.http.get<Graduate>( `${this.basePath}/${id}`, this.httpOptions)
+courseContaining(course:string){
+  return this.http.get<Graduate>( `${this.basePath}/courseContaining/${course}`, this.httpOptions)
+  .pipe(
+    retry(2),
+    catchError(this.handleError));
+}
+
+courseNotContaining(course:string){
+  return this.http.get<Graduate>( `${this.basePath}/courseNotContaining/${course}`, this.httpOptions)
   .pipe(
     retry(2),
     catchError(this.handleError));
 
 }
-getBySex(name:string){
-
-  return this.http.get<Graduate>( `${this.basePath}/sex/${name}`, this.httpOptions)
-  .pipe(
-    retry(2),
-    catchError(this.handleError));
-
-}
-
 
 
 

@@ -162,10 +162,10 @@ export class UpdatePageComponent implements OnInit {
               this.GraduateUpdate.sex=this.Graduate.sex
             }
             if(this.validcourse==false){
-              this.GraduateUpdate.type_of_course=this.Graduate.type_of_course
+              this.GraduateUpdate.typeOfCourse=this.Graduate.typeOfCourse
             }
             if(this.validno==false){
-              this.GraduateUpdate.no_of_graduates=this.Graduate.no_of_graduates
+              this.GraduateUpdate.noOfGraduates=this.Graduate.noOfGraduates
             }
             console.log(this.GraduateUpdate)
           }

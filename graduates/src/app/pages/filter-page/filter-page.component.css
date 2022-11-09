@@ -1,0 +1,48 @@
+.btn-check{
+    width: 100%;
+}
+.tab{
+    width: 100%;
+}
+table{
+
+    width: 100%;
+}
+
+.mat-column-year {
+    width: 32px;
+    border-right: 1px solid currentColor;
+   
+    text-align: center;
+  }
+  .mat-column-sex {
+    width: 32px;
+    border-right: 1px solid currentColor;
+   
+    text-align: center;
+  }
+  .mat-column-type_course {
+    width: 32px;
+    border-right: 1px solid currentColor;
+    
+    text-align: center;
+  }
+  .mat-column-no_graduates {
+    width: 32px;
+    border-right: 1px solid currentColor;
+  
+    text-align: center;
+  }
+  .mat-header-cell{
+
+    color: red;
+    font-size: 30px;
+    align-items: center;
+  }
+  .mat-row:hover  .mat-cell{
+    border-color: currentColor;
+  }
+  .mat-row .mat-cell {
+    border-top: 1px solid transparent;
+    cursor: pointer;
+  }
