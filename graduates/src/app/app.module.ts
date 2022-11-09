@@ -1,3 +1,4 @@
+import { FilterPageComponent } from './pages/filter-page/filter-page.component';
 import { CreatePageComponent } from './pages/create-page/create-page.component';
 import { ConfirmMessageComponent } from './components/confirm-message/confirm-message.component';
 import { UpdatePageComponent } from './pages/update-page/update-page.component';
@@ -20,7 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavigationComponent,
     UpdatePageComponent,
     ConfirmMessageComponent,
-    CreatePageComponent
+    CreatePageComponent,
+    FilterPageComponent
   
   ],
   imports: [

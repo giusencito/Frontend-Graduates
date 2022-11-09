@@ -1,11 +1,11 @@
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 80%;
+    width: 95%;
     
   }
   p{
-    font-size: 50px;
+    font-size: 35px;
   }
   td, th {
     border: 1px solid #dddddd;
