@@ -46,3 +46,9 @@ table{
     border-top: 1px solid transparent;
     cursor: pointer;
   }
+  .nodata{
+  text-align: center;
+  font-size: 30px;
+
+
+  }

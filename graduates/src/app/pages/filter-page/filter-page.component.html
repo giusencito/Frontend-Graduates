@@ -139,7 +139,7 @@
      <form [formGroup]="getcourseform">
       <mat-card>
 
-        <mat-form-field appearance="fill" >
+        <mat-form-field appearance="fill" class="btn-check">
           <mat-label>Starts with</mat-label>
           <input matInput placeholder="D"  required formControlName="course"  [(ngModel)]="course">
         </mat-form-field>
@@ -150,7 +150,7 @@
     </div>
     <div *ngIf="endwith">
       <form [formGroup]="getcourseform"> <mat-card>
-        <mat-form-field appearance="fill" >
+        <mat-form-field appearance="fill" class="btn-check">
           <mat-label>Ending With</mat-label>
           <input matInput placeholder="r"  required formControlName="course"  [(ngModel)]="course">
         </mat-form-field>
@@ -159,7 +159,7 @@
     </div>
     <div *ngIf="containg">
       <form [formGroup]="getcourseform"> <mat-card>
-        <mat-form-field appearance="fill" >
+        <mat-form-field appearance="fill" class="btn-check">
           <mat-label>Containing</mat-label>
           <input matInput placeholder="D"  required formControlName="course"  [(ngModel)]="course">
         </mat-form-field>
@@ -168,7 +168,7 @@
     </div>
     <div *ngIf="notcontaining">
       <form [formGroup]="getcourseform"> <mat-card>
-        <mat-form-field appearance="fill" >
+        <mat-form-field appearance="fill" class="btn-check">
           <mat-label>Not Containing</mat-label>
           <input matInput placeholder="D"  required formControlName="course"  [(ngModel)]="course">
         </mat-form-field>
@@ -183,54 +183,196 @@
 
     <table class="tab">
       <tr>
-        <th>  <button mat-raised-button (click)="changestart()">Equals</button></th>
+        <th>  <button mat-raised-button (click)="changeequal()">Equals</button></th>
         <th>
-         <button mat-raised-button (click)="changesend()"> Less Than</button>
+         <button mat-raised-button (click)="changeLess()"> Less Than</button>
         </th>
         <th>
-          <button mat-raised-button (click)="changescontain()"> Greather than</button>
+          <button mat-raised-button (click)="changeGreather()"> Greather than</button>
         </th>
        
       </tr>
     </table>
+    <div *ngIf="equals">
+       <form   [formGroup]="getnumberform">
+        <mat-card>
+          <mat-form-field appearance="fill" class="btn-check">
+            <mat-label>Equals</mat-label>
+            <input matInput type="number" placeholder="Ex. 12" min="0" formControlName="number" [(ngModel)]="number">
 
+          </mat-form-field>
+          <button mat-raised-button class="btn-check" (click)="GetEqual(number)" [disabled]="!getnumberform.valid">Check</button>
+
+        </mat-card>
+       </form>
+    </div>
+    <div *ngIf="less">
+      <form [formGroup]="getnumberform">
+        <mat-card>
+          <mat-form-field appearance="fill" class="btn-check">
+            <mat-label>Less</mat-label>
+            <input matInput type="number" placeholder="Ex. 12" min="0" formControlName="number" [(ngModel)]="number">
+
+          </mat-form-field>
+          <button mat-raised-button class="btn-check" (click)="GetLess(number)" [disabled]="!getnumberform.valid">Check</button>
+
+        </mat-card>
+      </form>
+    </div>
+    <div *ngIf="greather">
+      <form [formGroup]="getnumberform">
+        <mat-card>
+          <mat-form-field appearance="fill"  class="btn-check">
+            <mat-label>Greather</mat-label>
+            <input matInput type="number" placeholder="Ex. 12" min="0" formControlName="number" [(ngModel)]="number">
+          </mat-form-field>
+          <button mat-raised-button class="btn-check" (click)="GetGreather(number)" [disabled]="!getnumberform.valid">Check</button>
+
+        </mat-card>
+      </form>
+    </div>
 
 
 
   </mat-tab>
+  <mat-tab label="Combine Colummns">
+
+    <table class="tab">
+      <tr>
+        <th>  <button mat-raised-button (click)="changesexyear()">Sex and Year</button></th>
+        <th>
+         <button mat-raised-button (click)="changesexcourse()"> Sex and Course</button>
+        </th>
+        <th>
+          <button mat-raised-button (click)="changesexnumber()"> Sex and Number</button>
+        </th>
+        <th>
+          <button mat-raised-button (click)="changeyearcourse()"> Year and Course</button>
+        </th>
+      </tr>
+    </table>
+    <div *ngIf="sexyear">
+      <form [formGroup]="getsexyearform">
+        <mat-card>
+          <mat-form-field appearance="fill"  class="btn-check">
+            <mat-label>Enter the Sex</mat-label>
+            <mat-select formControlName="sex"  [(ngModel)]="sex">
+              <mat-option value="Males">Males</mat-option>
+              <mat-option value="Females">Females</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="btn-check">  
+            <mat-label>Enter the Year</mat-label>
+            <mat-select formControlName="year" [(ngModel)]="yearby">
+              <mat-option *ngFor="let year of years" [value]="year">
+                   {{year}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-raised-button class="btn-check" (click)="GetSexYear(sex,yearby)" [disabled]="!getsexyearform.valid">Check</button>
+
+        </mat-card>
+      </form>
+    </div>
+    <div *ngIf="sexcourse">
+      <form [formGroup]="getsexcourseform">
+        <mat-card>
+          <mat-form-field appearance="fill"  class="btn-check">
+            <mat-label>Enter the Sex</mat-label>
+            <mat-select formControlName="sex"  [(ngModel)]="sex">
+              <mat-option value="Males">Males</mat-option>
+              <mat-option value="Females">Females</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill"  class="btn-check">
+            <mat-label>Enter Course</mat-label>
+            <input matInput placeholder="D"  required formControlName="course"  [(ngModel)]="course">
+          </mat-form-field>
+          <button mat-raised-button class="btn-check" (click)="GetSexCourse(sex,course)" [disabled]="!getsexcourseform.valid">Check</button>
+
+        </mat-card>
+      </form>
+    </div>
+    <div *ngIf="sexnumber">
+      <form [formGroup]="getsexnumberform">
+        <mat-card>
+          <mat-form-field appearance="fill"  class="btn-check">
+            <mat-label>Enter the Sex</mat-label>
+            <mat-select formControlName="sex"  [(ngModel)]="sex">
+              <mat-option value="Males">Males</mat-option>
+              <mat-option value="Females">Females</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill"  class="btn-check">
+            <mat-label>Enter Number</mat-label>
+            <input matInput type="number" placeholder="Ex. 12" min="0" formControlName="number" [(ngModel)]="number">
+
+          </mat-form-field>
+          <button mat-raised-button class="btn-check" (click)="GetSexNumber(sex,number)" [disabled]="!getsexnumberform.valid">Check</button>
+
+        </mat-card>
+      </form>
+    </div>
+    <div *ngIf="yearcourse">
+      <form [formGroup]="getyearcourseform">
+        <mat-card>
+          <mat-form-field appearance="fill" class="btn-check">  
+            <mat-label>Enter the Year</mat-label>
+            <mat-select formControlName="year" [(ngModel)]="yearby">
+              <mat-option *ngFor="let year of years" [value]="year">
+                   {{year}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill"  class="btn-check" >
+            <mat-label>Enter Course</mat-label>
+            <input matInput placeholder="D"  required formControlName="course"  [(ngModel)]="course">
+          </mat-form-field>
+          <button mat-raised-button class="btn-check" (click)="GetYearCourse(yearby,course)" [disabled]="!getyearcourseform.valid">Check</button>
+
+        </mat-card>
+      </form>
+    </div>
+    
+
+
+  </mat-tab>
 </mat-tab-group>
-<div class="mat-elevation-z8" *ngIf="changesize">
+<div class="mat-elevation-z8" *ngIf="changesize" >
   <table mat-table [dataSource]="dataSource" >
    
     
-    <ng-container matColumnDef="year" >
+    <ng-container matColumnDef="year">
       <th mat-header-cell *matHeaderCellDef > Year</th>
       <td mat-cell *matCellDef="let element"> {{element.year}} </td>
     </ng-container>
-    <ng-container matColumnDef="sex">
+    <ng-container matColumnDef="sex" >
       <th mat-header-cell *matHeaderCellDef > Sex </th>
       <td mat-cell *matCellDef="let element"> {{element.sex}} </td>
     </ng-container>
-    <ng-container matColumnDef="type_course">
+    <ng-container matColumnDef="type_course" >
       <th mat-header-cell *matHeaderCellDef > Type Of Course </th>
       <td mat-cell *matCellDef="let element"> {{element.typeOfCourse}} </td>
     </ng-container>
-    <ng-container matColumnDef="no_graduates">
+    <ng-container matColumnDef="no_graduates" >
       <th mat-header-cell *matHeaderCellDef > No. Of Graduates </th>
       <td mat-cell *matCellDef="let element"> {{element.noOfGraduates}} </td>
     </ng-container>
 
-
+    
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row 
     (click)="update(row.id)"
     *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  <div *ngIf="setnodata" class="nodata">No records Available</div>
   <mat-paginator   [pageSizeOptions]="[5, 10, 20]"
                    showFirstLastButtons 
-                   aria-label="Select page of periodic elements" >
-    </mat-paginator>
+                   aria-label="Select page of periodic elements">
+  </mat-paginator>
+ 
+  
   </div>
 
 

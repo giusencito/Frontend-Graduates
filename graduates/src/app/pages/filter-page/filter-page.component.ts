@@ -1,3 +1,5 @@
+import { CombineService } from './../../services/combine/combine.service';
+import { NumberService } from './../../services/number/number.service';
 import { CourseService } from './../../services/course/course.service';
 import { GraduateService } from './../../services/graduate.service';
 import { YearService } from './../../services/year/year.service';
@@ -22,6 +24,12 @@ export class FilterPageComponent implements OnInit {
    getyearbetform!:FormGroup;
    getsexform!:FormGroup;
    getcourseform!:FormGroup;
+   getnumberform!:FormGroup;
+
+   getsexyearform!:FormGroup;
+   getsexcourseform!:FormGroup;
+   getsexnumberform!:FormGroup;
+   getyearcourseform!:FormGroup;
    years:Array<string>=[]
    yearby!:string
 
@@ -38,17 +46,30 @@ export class FilterPageComponent implements OnInit {
    containg=false;
    notcontaining=false
 
+   equals=false
+   less=false
+   greather=false
+
+    sexyear=false
+    sexcourse=false
+    sexnumber=false
+    yearcourse=false
 
 
    changesize=false
 
+
+   setnodata=false
+
    sex!:string
    course!:string
+   number!:number
    displayedColumns: string[] = ['year', 'sex', 'type_course', 'no_graduates'];
    dataSource!:MatTableDataSource<any>;
    @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor(private datepipe: DatePipe,private formBuilder:FormBuilder,private router:Router,private YearService:YearService,
-    private GraduateService:GraduateService,private CourseService:CourseService) {
+    private GraduateService:GraduateService,private CourseService:CourseService,
+    private NumberService:NumberService,private CombineService:CombineService) {
     
     
    }
@@ -78,6 +99,31 @@ export class FilterPageComponent implements OnInit {
      
 
      })
+     this.getnumberform=this.formBuilder.group({
+      number:['',Validators.required],
+     
+
+     })
+     this.getsexyearform=this.formBuilder.group({
+      sex:['',Validators.required],
+      year:['',Validators.required],
+
+     })
+     this.getsexcourseform=this.formBuilder.group({
+      sex:['',Validators.required],
+      course:['',Validators.required],
+
+     })
+     this.getsexnumberform=this.formBuilder.group({
+      sex:['',Validators.required],
+      number:['',Validators.required],
+
+     })
+     this.getyearcourseform=this.formBuilder.group({
+      year:['',Validators.required],
+      course:['',Validators.required],
+
+     })
     
   }
   currentyears(){
@@ -89,7 +135,7 @@ export class FilterPageComponent implements OnInit {
     }
 
  }
-
+ 
   changefindyear(){
 
    if(this.findyear==false){
@@ -206,11 +252,100 @@ export class FilterPageComponent implements OnInit {
 
 
   }
+  changeequal(){
+    if(this.equals==false){
+      
+      this.greather=false
+      this.less=false
+      this.equals=true
+        
+     }else{
+      this.equals=false
+     
+     }
 
 
+  }
+  changeLess(){
+    if(this.less==false){
+      
+      this.greather=false
+      this.equals=false
+      this.less=true
+        
+     }else{
+      this.less=false
+     
+     }
 
+  }
+  changeGreather(){
+    if(this.greather==false){
+      
+      this.greather=true
+      this.equals=false
+      this.less=false
+        
+     }else{
+      this.greather=false
+     
+     }
 
+  }
+  changesexyear(){
+    if(this.sexyear==false){
+      
+      this.sexyear=true
+      this.sexcourse=false
+      this.sexnumber=false
+      this.yearcourse=false
+        
+     }else{
+      this.sexyear=false
+     
+     }
 
+  }
+  changesexcourse(){
+    if(this.sexcourse==false){
+      
+      this.sexyear=false
+      this.sexcourse=true
+      this.sexnumber=false
+      this.yearcourse=false
+        
+     }else{
+      this.sexcourse=false
+     
+     }
+  }
+  changesexnumber(){
+    if(this.sexnumber==false){
+      
+      this.sexyear=false
+      this.sexcourse=false
+      this.sexnumber=true
+      this.yearcourse=false
+        
+     }else{
+      this.sexnumber=false
+     
+     }
+  }
+  changeyearcourse(){
+    if(this.yearcourse==false){
+      
+      this.sexyear=false
+      this.sexcourse=false
+      this.sexnumber=false
+      this.yearcourse=true
+        
+     }else{
+      this.yearcourse=false
+     
+     }
+
+  }
 
 
 
@@ -227,8 +362,14 @@ export class FilterPageComponent implements OnInit {
 
                this.dataSource = new MatTableDataSource<Graduate>(response.content);
                this.dataSource.paginator = this.paginator;
-               
-
+               console.log(this.dataSource.paginator)
+              
+               console.log(this.dataSource.data.length)
+              if(this.dataSource.data.length==0){
+                 this.setnodata=true
+              }else{
+                this.setnodata=false
+              }
         
         
        
@@ -241,7 +382,11 @@ export class FilterPageComponent implements OnInit {
 
             this.dataSource = new MatTableDataSource<Graduate>(response.content);
             this.dataSource.paginator = this.paginator;
-            
+            if(this.dataSource.data.length==0){
+              this.setnodata=true
+           }else{
+             this.setnodata=false
+           }
 
      
      
@@ -256,7 +401,11 @@ export class FilterPageComponent implements OnInit {
 
             this.dataSource = new MatTableDataSource<Graduate>(response.content);
             this.dataSource.paginator = this.paginator;
-            
+            if(this.dataSource.data.length==0){
+              this.setnodata=true
+           }else{
+             this.setnodata=false
+           }
 
      
      
@@ -270,7 +419,11 @@ GetByAfterYear(year:string){
 
           this.dataSource = new MatTableDataSource<Graduate>(response.content);
           this.dataSource.paginator = this.paginator;
-          
+          if(this.dataSource.data.length==0){
+            this.setnodata=true
+         }else{
+           this.setnodata=false
+         }
 
    
    
@@ -284,6 +437,11 @@ GetBySex(sex:string){
 
          this.dataSource = new MatTableDataSource<Graduate>(response.content);
           this.dataSource.paginator = this.paginator;
+          if(this.dataSource.data.length==0){
+            this.setnodata=true
+         }else{
+           this.setnodata=false
+         }
   })
 
 
@@ -296,6 +454,11 @@ GetStart(word:string){
 
          this.dataSource = new MatTableDataSource<Graduate>(response.content);
           this.dataSource.paginator = this.paginator;
+          if(this.dataSource.data.length==0){
+            this.setnodata=true
+         }else{
+           this.setnodata=false
+         }
   })
 }
 GetEnd(word:string){
@@ -304,6 +467,11 @@ GetEnd(word:string){
 
          this.dataSource = new MatTableDataSource<Graduate>(response.content);
           this.dataSource.paginator = this.paginator;
+          if(this.dataSource.data.length==0){
+            this.setnodata=true
+         }else{
+           this.setnodata=false
+         }
   })
 
 }
@@ -313,6 +481,11 @@ GetContaining(word:string){
 
          this.dataSource = new MatTableDataSource<Graduate>(response.content);
           this.dataSource.paginator = this.paginator;
+          if(this.dataSource.data.length==0){
+            this.setnodata=true
+         }else{
+           this.setnodata=false
+         }
   })
 }
 GetNotContaining(word:string){
@@ -321,10 +494,114 @@ GetNotContaining(word:string){
 
          this.dataSource = new MatTableDataSource<Graduate>(response.content);
           this.dataSource.paginator = this.paginator;
+          if(this.dataSource.data.length==0){
+            this.setnodata=true
+         }else{
+           this.setnodata=false
+         }
   })
 }
+GetEqual(number:number){
+  this.changesize=true
+  this.NumberService.getNumber(number).subscribe((response:any)=>{
+
+         this.dataSource = new MatTableDataSource<Graduate>(response.content);
+          this.dataSource.paginator = this.paginator;
+          if(this.dataSource.data.length==0){
+            this.setnodata=true
+         }else{
+           this.setnodata=false
+         }
+  })
+
+}
+GetLess(number:number){
+  this.changesize=true
+  this.NumberService.getLess(number).subscribe((response:any)=>{
+
+         this.dataSource = new MatTableDataSource<Graduate>(response.content);
+          this.dataSource.paginator = this.paginator;
+          if(this.dataSource.data.length==0){
+            this.setnodata=true
+         }else{
+           this.setnodata=false
+         }
+  })
+}
+GetGreather(number:number){
+  this.changesize=true
+  this.NumberService.getGreather(number).subscribe((response:any)=>{
+
+         this.dataSource = new MatTableDataSource<Graduate>(response.content);
+          this.dataSource.paginator = this.paginator;
+          if(this.dataSource.data.length==0){
+            this.setnodata=true
+         }else{
+           this.setnodata=false
+         }
+  })
+  
+}
+GetSexYear(sex:string,year:string){
+  this.changesize=true
+  this.CombineService.getSexYear(sex,year).subscribe((response:any)=>{
+
+         this.dataSource = new MatTableDataSource<Graduate>(response.content);
+          this.dataSource.paginator = this.paginator;
+          if(this.dataSource.data.length==0){
+            this.setnodata=true
+         }else{
+           this.setnodata=false
+         }
+  })
+
+}
+GetSexCourse(sex:string,course:string){
+  this.changesize=true
+  this.CombineService.getSexCourse(sex,course).subscribe((response:any)=>{
+
+         this.dataSource = new MatTableDataSource<Graduate>(response.content);
+          this.dataSource.paginator = this.paginator;
+          if(this.dataSource.data.length==0){
+            this.setnodata=true
+         }else{
+           this.setnodata=false
+         }
+  })
 
 
+}
+
+GetSexNumber(sex:string,number:number){
+  this.changesize=true
+  this.CombineService.getSexNumber(sex,number).subscribe((response:any)=>{
+
+         this.dataSource = new MatTableDataSource<Graduate>(response.content);
+          this.dataSource.paginator = this.paginator;
+          if(this.dataSource.data.length==0){
+            this.setnodata=true
+         }else{
+           this.setnodata=false
+         }
+  })
+
+}
+
+GetYearCourse(year:string,course:string){
+  this.changesize=true
+  this.CombineService.getYearCourse(year,course).subscribe((response:any)=>{
+
+         this.dataSource = new MatTableDataSource<Graduate>(response.content);
+          this.dataSource.paginator = this.paginator;
+          if(this.dataSource.data.length==0){
+            this.setnodata=true
+         }else{
+           this.setnodata=false
+         }
+          
+  })
+
+}
 
 
 

@@ -13,7 +13,7 @@ export class ConfirmMessageComponent implements OnInit {
     console.log(this.data)
   }
   denegate(){
-    this.data.state=false
+   
     this.dialogRef.close();
     
   }

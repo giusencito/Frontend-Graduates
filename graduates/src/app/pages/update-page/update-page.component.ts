@@ -5,7 +5,7 @@ import { GraduateService } from './../../services/graduate.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -29,7 +29,7 @@ export class UpdatePageComponent implements OnInit {
    validno=false
    validateupdate=false
   constructor(private formBuilder:FormBuilder,private datepipe: DatePipe,private GraduateService:GraduateService,
-    private route:ActivatedRoute,public dialog:MatDialog) { 
+    private route:ActivatedRoute,public dialog:MatDialog,private router:Router) { 
 
      this.Graduate =   {} as Graduate
      this.GraduateUpdate =   {} as Graduate
@@ -149,11 +149,11 @@ export class UpdatePageComponent implements OnInit {
         
          const dialogRef = this.dialog.open(ConfirmMessageComponent, {
           width: '500px',
-          data: {message: "¿ Esta seguro de actualizar ?",state:true},
+          data: {message: "¿ Are you sure to update ?",state:true},
         });
         dialogRef.afterClosed().subscribe(result => {
   
-          if(result.state==true){
+          if(result!=undefined){
             console.log('The dialog was closed');
             if(this.validyear==false){
                   this.GraduateUpdate.year=this.Graduate.year
@@ -168,6 +168,10 @@ export class UpdatePageComponent implements OnInit {
               this.GraduateUpdate.noOfGraduates=this.Graduate.noOfGraduates
             }
             console.log(this.GraduateUpdate)
+            console.log(this.graduateid)
+            this.GraduateService.Update(this.graduateid, this.GraduateUpdate).subscribe((response:any)=>{
+              this.router.navigate(['/home'])
+            })
           }
         })
   }
@@ -175,11 +179,14 @@ export class UpdatePageComponent implements OnInit {
     
     const dialogRef = this.dialog.open(ConfirmMessageComponent, {
       width: '500px',
-      data: {message: "¿ Esta seguro de eliminar ?",state:true},
+      data: {message: "¿ Are you sure to delete ?",state:true},
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result.state==true){
+      if(result!=undefined){
         console.log('The dialog was closed');
+        this.GraduateService.Delete(this.graduateid,).subscribe((response:any)=>{
+          this.router.navigate(['/home'])
+        })
       }
 
     })

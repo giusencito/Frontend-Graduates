@@ -6,10 +6,9 @@ import { Graduate } from 'src/app/models/Graduate';
 @Injectable({
   providedIn: 'root'
 })
-export class NumberService {
+export class CombineService {
 
-
-  basePath="http://localhost:8080/api/v1/graduates/numbers"
+  basePath="http://localhost:8080/api/v1/graduatesCrud"
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -28,26 +27,49 @@ handleError(error: HttpErrorResponse) {
 
   return throwError('Something happened with request, please try again later');
 }
-
-
-getNumber(number:number){
-  return this.http.get<Graduate>( `${this.basePath}/${number}`, this.httpOptions)
+getSexYear(sex:string,year:string){
+  return this.http.get<Graduate>( `${this.basePath}/getSexAndYear/${sex}/${year}`, this.httpOptions)
   .pipe(
     retry(2),
     catchError(this.handleError));
 }
-getLess(number:number){
-  return this.http.get<Graduate>( `${this.basePath}/noGraduatesLess/${number}`, this.httpOptions)
+getSexCourse(sex:string,course:string){
+  return this.http.get<Graduate>( `${this.basePath}/getSexAndCourse/${sex}/${course}`, this.httpOptions)
   .pipe(
     retry(2),
     catchError(this.handleError));
+  
+}
+getSexNumber(sex:string,number:number){
+  return this.http.get<Graduate>( `${this.basePath}/getSexAndNumber/${sex}/${number}`, this.httpOptions)
+  .pipe(
+    retry(2),
+    catchError(this.handleError));
+  
+}
+getYearCourse(year:string,course:string){
+  return this.http.get<Graduate>( `${this.basePath}/getSeYearAndCourse/${year}/${course}`, this.httpOptions)
+  .pipe(
+    retry(2),
+    catchError(this.handleError));
+  
+}
 
-}
-getGreather(number:number){
-  return this.http.get<Graduate>( `${this.basePath}/noGraduatesGreather/${number}`, this.httpOptions)
-  .pipe(
-    retry(2),
-    catchError(this.handleError));
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

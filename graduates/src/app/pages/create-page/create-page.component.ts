@@ -1,7 +1,11 @@
+import { Router } from '@angular/router';
+import { GraduateService } from './../../services/graduate.service';
+import { ConfirmMessageComponent } from './../../components/confirm-message/confirm-message.component';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { Graduate } from 'src/app/models/Graduate';
 import { DatePipe } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-create-page',
   templateUrl: './create-page.component.html',
@@ -15,7 +19,8 @@ export class CreatePageComponent implements OnInit {
   latest_date!:string
    yearprov!:number
    years:Array<string>=[]
-  constructor(private datepipe: DatePipe,private formBuilder:FormBuilder) { 
+  constructor(private datepipe: DatePipe,private formBuilder:FormBuilder,private dialog:MatDialog
+    ,private GraduateService:GraduateService,private route:Router) { 
     this.Graduate =   {} as Graduate
   }
 
@@ -44,7 +49,29 @@ export class CreatePageComponent implements OnInit {
 
  }
 
- create(){}
+ create(){
+
+  const dialogRef = this.dialog.open(ConfirmMessageComponent, {
+    width: '500px',
+    data: {message: "¿Are you sure to create  ?",state:true},
+  });
+  dialogRef.afterClosed().subscribe(result => {
+       
+      if(result!=undefined){
+        console.log('The dialog was closed');
+        this.GraduateService.create(this.Graduate).subscribe((response:any)=>{
+          this.route.navigate(['/home'])
+        })
+
+      }
+      
+   
+
+  })
+
+
+
+ }
 
  clean(){
   this.createform.reset()

@@ -13,7 +13,7 @@
     </th>
    
     <th><h1 class="button">
-      <button mat-raised-button (click)="checkyear()">Actualizar</button>
+      <button mat-raised-button (click)="checkyear()">Update</button>
     </h1></th>
   </tr>
   <tr>
@@ -23,7 +23,7 @@
     </th>
    
     <th><h1 class="button">
-      <button mat-raised-button (click)="checksex()">Actualizar</button>
+      <button mat-raised-button (click)="checksex()">Update</button>
     </h1></th>
   </tr>
   
@@ -34,7 +34,7 @@
     </th>
    
     <th><h1 class="button">
-      <button mat-raised-button (click)="checkcourse()">Actualizar</button>
+      <button mat-raised-button (click)="checkcourse()">Update</button>
     </h1></th>
   </tr>
   <tr>
@@ -44,7 +44,7 @@
     </th>
    
     <th><h1 class="button">
-      <button mat-raised-button (click)="checknumber()">Actualizar</button>
+      <button mat-raised-button (click)="checknumber()">Update</button>
     </h1></th>
   </tr>
 
@@ -61,7 +61,7 @@
            {{year}}
       </mat-option>
     </mat-select>
-    <mat-error *ngIf="updateform.controls['year'].dirty && updateform.hasError('required','email')">Es requerido</mat-error>
+    <mat-error *ngIf="updateform.controls['year'].dirty && updateform.hasError('required','email')">Required</mat-error>
   </mat-form-field>
 </div>
 <div *ngIf="validsex">
@@ -71,14 +71,14 @@
       <mat-option value="Males">Males</mat-option>
       <mat-option value="Females">Females</mat-option>
     </mat-select>
-    <mat-error *ngIf="updateform.controls['sex'].dirty && updateform.hasError('required','sex')">Es requerido</mat-error>
+    <mat-error *ngIf="updateform.controls['sex'].dirty && updateform.hasError('required','sex')">Required</mat-error>
   </mat-form-field>
 </div>
 <div *ngIf="validcourse">
   <mat-form-field appearance="fill">
     <mat-label>Type of Course</mat-label>
     <input matInput placeholder="Doctor"  required formControlName="course"  [(ngModel)]="GraduateUpdate.typeOfCourse">
-    <mat-error *ngIf="updateform.controls['course'].dirty && updateform.hasError('required','course')">Es requerido</mat-error>
+    <mat-error *ngIf="updateform.controls['course'].dirty && updateform.hasError('required','course')">Required</mat-error>
 
   </mat-form-field>
 </div>
@@ -86,12 +86,12 @@
   <mat-form-field appearance="fill">
     <mat-label>No. Of Graduates</mat-label>
     <input matInput type="number" placeholder="Ex. 12" min="0" formControlName="no_graduates" [(ngModel)]="GraduateUpdate.noOfGraduates">
-    <mat-error *ngIf="updateform.controls['no_graduates'].dirty && updateform.hasError('required','no_graduates')">Es requerido</mat-error>
+    <mat-error *ngIf="updateform.controls['no_graduates'].dirty && updateform.hasError('required','no_graduates')">Required</mat-error>
 
   </mat-form-field>
 </div>
 <div  *ngIf="validateupdate">
-<button mat-raised-button (click)="update()" [disabled]="!validateinput()">Confirmar</button>
+<button mat-raised-button (click)="update()" [disabled]="!validateinput()">Confirm</button>
 </div>
 </form>
 </div>
@@ -100,7 +100,7 @@
 </mat-card>
 <mat-card>
 
-    <button mat-raised-button class="eliminated" color="warn" (click)="delete()">Eliminar</button>
+    <button mat-raised-button class="eliminated" color="warn" (click)="delete()">Delete</button>
 
 
 </mat-card>

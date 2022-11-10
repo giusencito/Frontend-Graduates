@@ -51,6 +51,29 @@ getBySex(name:string){
     catchError(this.handleError));
 
 }
+create(graduate:Graduate){
+  return this.http.post<Graduate>( `${this.basePath}`,JSON.stringify(graduate) ,this.httpOptions)
+  .pipe(
+    retry(2),
+    catchError(this.handleError));
+
+}
+Update(id:number,graduate:Graduate){
+
+  return this.http.put<Graduate>( `${this.basePath}/${id}`,JSON.stringify(graduate) ,this.httpOptions)
+  .pipe(
+    retry(2),
+    catchError(this.handleError));
+
+}
+Delete(id:number){
+
+  return this.http.delete<Graduate>( `${this.basePath}/${id}`,this.httpOptions)
+  .pipe(
+    retry(2),
+    catchError(this.handleError));
+
+}
 
 
 
